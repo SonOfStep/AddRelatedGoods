@@ -3,7 +3,8 @@
 // @name:ru      Добавить сопутствующие товары
 // @description  Добавляет к растворам в сопуствующие товары перчатки, маски и другое
 // @namespace    https://vk.com/omario97
-// @version      0.1
+// @version      0.2
+// @updateURL    https://raw.githubusercontent.com/SonOfStep/AddRelatedGoods/main/index.js
 // @authot       Omar "SonOfStep" Nurmakhanov
 // @match        *://172.30.149.11:8282/OE/appointment/remsandapps*
 // @grant 		 none
