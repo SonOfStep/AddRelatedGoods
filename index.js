@@ -3,7 +3,7 @@
 // @name:ru      Добавить сопутствующие товары
 // @description  Добавляет к растворам в сопуствующие товары перчатки, маски и другое
 // @namespace    https://vk.com/omario97
-// @version      0.2
+// @version      0.3
 // @updateURL    https://raw.githubusercontent.com/SonOfStep/AddRelatedGoods/main/index.js
 // @authot       Omar "SonOfStep" Nurmakhanov
 // @match        *://172.30.149.11:8282/OE/appointment/remsandapps*
@@ -61,13 +61,25 @@ const getRelatedGoods = ( name, id, token ) => {
 const addRelatedGoods = ( name, id, token ) => {
   getRelatedGoods( name , id, token ).then(
     result => getUnitMeasurement( result[0].id, token ).then(
-      result => console.log( result ),
+      result => {
+        console.log( result )
+
+        $('.attend_contaner .attend_dozes').each( (item, elem) => {
+          $(elem).val('1')
+        } )
+        $('.attend_doze_izms option').each( ( item, elem ) => {
+          if ( ( $(elem).text().includes('пара') ) || ( $(elem).text().includes('шт') ) ){
+            $(elem).prop('selected', true)
+          }
+        } )
+
+      },
       error => console.log( error )
     ),
     error => console.log( error )
   )
-  $('.dlv_rems_cntnt_block .inp_dz').val('2')
-  $('.dlv_rems_cntnt_block .deliv_izm').val('1')
+
+
 }
 
 $('#confmovdr').on('click', () => {
@@ -75,8 +87,7 @@ $('#confmovdr').on('click', () => {
 
   if ( isSoluble ) {
     addRelatedGoods( 'Перчатки', $('#appid_deliv').val(), TOKEN )
-    addRelatedGoods( 'Маска', $('#appid_deliv').val(), TOKEN )
+    addRelatedGoods( 'Салфетка', $('#appid_deliv').val(), TOKEN )
     addRelatedGoods( 'Шприц', $('#appid_deliv').val(), TOKEN )
   }
 })
-
